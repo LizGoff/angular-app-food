@@ -1,26 +1,39 @@
+
 var app = angular.module('FoodApp', []);
 
-app.controller('FoodController', function(){
+app.controller('FoodController', ['$http', function($http){
     console.log('FoodController loaded');
-  
-    var self = this; // holds the value of this
-  
+    var self = this; 
+
     self.food = [
-      {
-        "type": "taco",
-        "deliciousness-level": "yum",
-        "is-hot": "hot",
-        "shout-out": "woot!"
-      }
-    ];
-  
+        {
+            "foodType": '',
+            "deliciousnessLevel": '',
+            "isHot": ''
+        }
+        ];
+    
     self.newFood = {};
+      
+        self.createFoodEntry = function(){
+          console.log(self.newFood);
+          self.food.push(angular.copy(self.newFood));
+        };
+
+    $http({
+        method: 'GET',
+        url: '/food'
+
+    })
+    .then(function(response) {
+        console.log(response);
+    })
+    .catch(function(error) {
+        console.log('error on /food GET', error);
+    });
   
-    self.createFood = function(){
-      console.log(self.newFood);
-      self.food.push(angular.copy(self.newFood));
-    };
+  }]);
+
   
-  });
-  
+
 
