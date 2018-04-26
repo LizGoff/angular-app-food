@@ -2,8 +2,8 @@ const mongoose =require('mongoose');
 const Schema = mongoose.Schema;
 
 const foodSchema = new Schema({
-    name: {type: String, required: true, unique: true },
-    deliciousnessLevel: {type: Number, required: true },
+    foodType: {type: String, required: true },
+    deliciousnessLevel: {type: String, required: true },
     isHot: {type: String, required: true}
 });
 

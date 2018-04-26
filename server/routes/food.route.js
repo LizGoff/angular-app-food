@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
         .then((dataFromTheDatabase) => {
             console.log('data from database', dataFromTheDatabase);
             res.send(dataFromTheDatabase);
+            // self.foodList = response.data;
 
         })
         .catch((error) => {
@@ -23,12 +24,12 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 
     // ------- database read or find ------ //
-
-    Food.create()
+    // data from client become req.body
+    const foodToAdd = req.body;
+    Food.create(foodToAdd)
         .then((dataFromTheDatabase) => {
             console.log('data to database', dataFromTheDatabase);
-            res.post(dataFromTheDatabase);
-
+            res.sendStatus(200);
         })
         .catch((error) => {
             console.log('error with Food.find', error);
