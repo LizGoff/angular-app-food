@@ -23,9 +23,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 
     // ------- database read or find ------ //
-    const addNewFood = req.body;
 
-    Food.create(addNewFood)
+    Food.create()
         .then((dataFromTheDatabase) => {
             console.log('data to database', dataFromTheDatabase);
             res.post(dataFromTheDatabase);

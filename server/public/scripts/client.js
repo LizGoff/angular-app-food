@@ -1,37 +1,42 @@
 
 var app = angular.module('FoodApp', []);
 
-app.controller('FoodController', ['$http', function($http){
+app.controller('FoodController',
+    ['$http', function($http){
     console.log('FoodController loaded');
     var self = this; 
 
-    self.food = [
-        {
-            "foodType": '',
-            "deliciousnessLevel": '',
-            "isHot": ''
-        }
-        ];
+    self.food = 'candy';
+
+    self.foodList = [];
+
+    // self.food = [
+    //     {
+    //         "foodType": '',
+    //         "deliciousnessLevel": '',
+    //         "isHot": ''
+    //     }
+    //     ];
     
-    self.newFood = {};
+    // self.newFood = {};
       
-        self.createFoodEntry = function(){
-          console.log(self.newFood);
-          self.food.push(angular.copy(self.newFood));
-        };
+        // self.createFoodEntry = function(){
+        //   console.log(self.newFood);
+        //   self.food.push(angular.copy(self.newFood));
+        // };
+
 
     $http({
         method: 'GET',
         url: '/food'
-
     })
+
     .then(function(response) {
-        console.log(response);
+        self.foodList = response.data;
     })
     .catch(function(error) {
         console.log('error on /food GET', error);
     });
-  
   }]);
 
   
