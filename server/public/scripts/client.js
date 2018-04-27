@@ -6,43 +6,49 @@ app.controller('FoodController', ['$http', function ($http) {
     var self = this;
 
     self.foodList = [];
-
-    self.food = [
-        {
-            "foodType": '',
-            "deliciousnessLevel": '',
-            "isHot": ''
-        }
-    ];
+    getFoodEntry();
 
     self.newFood = {};
 
-    self.createFoodEntry = function () {
+    self.food = [
+        {
+            'foodType': 'Apple',
+            'deliciousnessLevel': '9',
+            'isHot': 'No'
+        }
+    ];
+
+
+    function getFoodEntry() {
         $http({
-            method: 'POST',
-            url: '/food',
-            data: self.newFood
+            method: 'GET',
+            url: '/foods'
         })
-
-            .then(function (response) {
-                console.log(response)
-            })
-            .catch(function (error) {
-                console.log('error on /food POST', error);
-            });
-    };
-
-    $http({
-        method: 'GET',
-        url: '/food'
-    })
-
         .then(function (response) {
             self.foodList = response.data;
         })
         .catch(function (error) {
-            console.log('error on /food GET', error);
+            console.log('error on /foods GET', error);
         });
+    };
+
+
+
+
+    self.createFoodEntry = function() {
+        $http({
+            method: 'POST',
+            url: '/foods',
+            data: self.newFood
+        })
+        .then(function (response) {
+            getFoodEntry();
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log('error on /foods POST', error);
+        });
+    };
 }]);
 
 
