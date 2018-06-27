@@ -1,15 +1,11 @@
-
 var app = angular.module('FoodApp', []);
 
 app.controller('FoodController', ['$http', function ($http) {
     console.log('FoodController loaded');
     var self = this;
-
     self.foodList = [];
     getFoodEntry();
-
     self.newFood = {};
-
     self.food = [
         {
             'foodType': 'Apple',
@@ -17,7 +13,6 @@ app.controller('FoodController', ['$http', function ($http) {
             'isHot': 'No'
         }
     ];
-
 
     function getFoodEntry() {
         $http({
@@ -31,9 +26,6 @@ app.controller('FoodController', ['$http', function ($http) {
             console.log('error on /foods GET', error);
         });
     };
-
-
-
 
     self.createFoodEntry = function() {
         $http({
@@ -50,7 +42,3 @@ app.controller('FoodController', ['$http', function ($http) {
         });
     };
 }]);
-
-
-
-
